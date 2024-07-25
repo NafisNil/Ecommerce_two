@@ -35,8 +35,14 @@
                 <h3 class="card-title">Banner Form</h3>
               </div>
               <!-- /.card-header -->
+
               <!-- form start -->
-              <form class="form-horizontal">
+
+              <form class="form-horizontal" action="{{ route('banner.store') }}" method="POST">
+                @csrf
+                <br>
+                @include('backend.alert')
+                <br><br>
                 <div class="card-body">
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-sm-2 col-form-label">Title <span class="text-danger">*</span></label>
@@ -47,11 +53,11 @@
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-sm-2 col-form-label">Description <span class="text-danger">*</span></label>
                     <div class="col-sm-10">
-                      <textarea name="description" id="" cols="30" rows="5" class="form-control" required>{{ old('description') }}</textarea>
+                      <textarea name="description" id="description" cols="30" rows="5" class="form-control" >{{ old('description') }}</textarea>
                     </div>
                   </div>
 
-                  <div class="form-group row">
+                  <div class="form-group pl-3">
                     <label for="exampleSelectBorder">Status <span class="text-danger">*</span></label>
 
                     <select class="custom-select form-control-border" id="exampleSelectBorder" name="status" required>
@@ -61,7 +67,7 @@
                     </select>
                   </div>
 
-                  <div class="form-group row">
+                  <div class="form-group row pl-3">
                     <label for="exampleSelectBorder">Condition <span class="text-danger">*</span></label>
 
                     <select class="custom-select form-control-border" id="exampleSelectBorder" name="condition" required>
@@ -70,12 +76,22 @@
 
                     </select>
                   </div>
-                  <div class="form-group">
-                    <div class="custom-file">
+                  <div class="form-group row pl-3">
 
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+                          <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                            <i class="fa fa-picture-o"></i> Choose
+                          </a>
+                        </span>
+                        <input id="thumbnail" class="form-control" type="text" name="photo">
+                      </div>
+                      <div id="holder" style="margin-top:15px;max-height:100px;"></div>
+
+
+
+
+
                   </div>
 
                 </div>
@@ -100,4 +116,16 @@
     </section>
     <!-- /.content -->
   </div>
+
+@endsection
+@section('scripts')
+<script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
+<script>
+    $('#lfm').filemanager('image');
+
+    $(document).ready(function() {
+        $('#description').summernote();
+    });
+
+</script>
 @endsection

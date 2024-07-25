@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('banners', function (Blueprint $table) {
             //
+            $table->enum('condition',['banner', 'promo'])->default('banner');
         });
     }
 
@@ -23,7 +24,6 @@ return new class extends Migration
     {
         Schema::table('banners', function (Blueprint $table) {
             //
-            $table->enum('condition',['banner', 'promo'])->default('banner');
         });
     }
 };
